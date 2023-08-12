@@ -12,7 +12,9 @@ class ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Navigator.pop(context);
         Navigator.pushNamed(context, route);
+
       },
       child: Container(
         height:62,
