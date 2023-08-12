@@ -41,7 +41,7 @@ void main(){
           // '/editUserProfile' : (context) => const EditProfileInfo(),
 
         },
-        initialRoute: '/union',
+        initialRoute: '/',
       )
   );
 }

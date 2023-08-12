@@ -23,7 +23,7 @@ class _SignUpState extends State<SignUp> {
         backgroundColor: Colors.white,
         leading: const backbutton(),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Sign Up',
           style: TextStyle(
             color: Colors.black,
@@ -34,7 +34,7 @@ class _SignUpState extends State<SignUp> {
       ),
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: 40,
@@ -46,17 +46,19 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: 15,
             ),
-            formFields(
+            const formFields(
               title: "Enter your email",
               logo: CupertinoIcons.mail,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             formFields(title: "Enter your password", logo: CupertinoIcons.lock),
             Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 40, 0),
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Checkbox(
                     activeColor: Color(0xff32c1e0),

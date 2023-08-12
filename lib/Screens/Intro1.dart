@@ -16,41 +16,50 @@ class _Intro1State extends State<Intro1> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 40, 25, 0),
-            child: Text('Skip',
-            style: TextStyle(
-              color: CupertinoColors.inactiveGray,
-              fontSize: 15
-            ),
-            ),
-          ),
-          SizedBox(height: 20,),
-          Image(
-            image: AssetImage(
-              'assets/lady.png',
+          Expanded(
+            flex: 1,
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(0, 40, 25, 0),
+              child: Text('Skip',
+              style: TextStyle(
+                color: CupertinoColors.inactiveGray,
+                fontSize: 15
+              ),
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 35, 18,  1),
-            child: Text('Consult only with a doctor you trust',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 29,
+         // SizedBox(height: 20,),
+          Expanded(
+            flex: 6,
+            child: const Image(
+              image: AssetImage(
+                'assets/lady.png',
+              ),
             ),
+          ),
+          Expanded(
+            flex: 2,
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(30, 35, 18,  1),
+              child: Text('Consult only with a doctor you trust',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 29,
+              ),
+              ),
             ),
           ),
           Expanded(
               flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Move(route: '/intro2',),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 20, 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: const [
+                    Move(route: '/intro2',),
+                  ],
+                ),
               )),
         ],
       ),

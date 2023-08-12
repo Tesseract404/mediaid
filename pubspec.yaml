@@ -64,11 +64,16 @@ flutter:
    - assets/logo.png
    - assets/logo2.png
    - assets/lady.png
+   - assets/lady2.png
    - assets/men.png
    - assets/doc1.png
    - assets/doc2.png
    - assets/doc3.png
    - assets/doc4.png
+   - assets/care.png
+   - assets/steth.png
+   - assets/pill.png
+   - assets/hospital.png
    - assets/calander.png
 
 
