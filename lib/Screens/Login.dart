@@ -51,7 +51,22 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 15,
             ),
-            Text("Don't have an account? Sign Up")
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account?"),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                  child: Text(" Sign Up",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color:  Color(0xff32c1e0),
+                  ),),
+                ),
+              ],
+            )
           ],
         ),
       ),

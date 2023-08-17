@@ -47,6 +47,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  path_provider: ^2.1.0
+  permission_handler: ^10.4.3
+  mysql1: ^0.20.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -73,8 +76,22 @@ flutter:
    - assets/care.png
    - assets/steth.png
    - assets/pill.png
+   - assets/brain.png
+   - assets/covid.png
+   - assets/heartrate.png
+   - assets/syringe.png
+   - assets/teeth.png
+   - assets/lungs.png
    - assets/hospital.png
    - assets/calander.png
+   - assets/pres.png
+   - assets/eco.png
+   - assets/bot.png
+   - assets/pulse.png
+   - assets/cal.png
+   - assets/scale.png
+   - assets/wpa.png
+   - assets/metlife.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

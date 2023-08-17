@@ -15,16 +15,24 @@ class _Intro2State extends State<Intro2> {
     return  Scaffold(
       backgroundColor: Colors.white,
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 1,
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(0, 40, 25, 0),
-              child: Text('Skip',
-                style: TextStyle(
-                    color: CupertinoColors.inactiveGray,
-                    fontSize: 15
+            child:   Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 40, 25, 0),
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/getstart');
+                  },
+                  child: Text('Skip',
+                    style: TextStyle(
+                        color: CupertinoColors.inactiveGray,
+                        fontSize: 15
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -32,9 +40,12 @@ class _Intro2State extends State<Intro2> {
           // SizedBox(height: 20,),
           Expanded(
             flex: 5,
-            child: const Image(
-              image: AssetImage(
-                'assets/calander.png',
+            child: Align(
+              alignment: Alignment.center,
+              child: const Image(
+                image: AssetImage(
+                  'assets/calander.png',
+                ),
               ),
             ),
           ),
@@ -52,14 +63,11 @@ class _Intro2State extends State<Intro2> {
           ),
           Expanded(
               flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 20, 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
-                    Move(route: '/intro3',),
-                  ],
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 20, 20),
+                  child: Move(route: '/intro3',),
                 ),
               )),
         ],

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mediaid1/Screens/Home.dart';
+import 'package:mediaid1/Widgets/diagnosis.dart';
+import 'package:mediaid1/Widgets/diagnosisSmaller.dart';
 
 import '../Widgets/buttons/ActionButton.dart';
 import '../Widgets/buttons/ActionButtonSmall.dart';
@@ -35,7 +37,7 @@ class _ProfileState extends State<Profile> {
             )),
           ),
           Positioned(
-              top: 100,
+              top: 70,
               right: 100,
               left: 100,
               child: Column(
@@ -56,10 +58,22 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
-                    color: Colors.blueAccent
+                    color: Color(0xff4b8099)
                   ),),
-                ],
+                ], 
               )),
+          Positioned(
+            top: 250,
+            right: 20,
+            left: 20,
+            child:
+          Row(
+            children: [
+              Expanded(child: diagnosisSmaller (icon: 'assets/pulse.png',title: 'Heart Rate', count: '215bpm',)),
+              Expanded(child: diagnosisSmaller(icon: 'assets/cal.png',title: 'Calories', count: '756cal',)),
+              Expanded(child: diagnosisSmaller(icon: 'assets/scale.png',title: 'Weight', count: '64kgs',)),
+            ],
+          ), ),
           Positioned(
             right: 0,
             left: 0,
@@ -76,6 +90,9 @@ class _ProfileState extends State<Profile> {
                 children: [
                   SizedBox(height: 30),
                   ListTile(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/health');
+                    },
                     leading: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -98,6 +115,9 @@ class _ProfileState extends State<Profile> {
                     thickness: 0.8,
                   ),
                   ListTile(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/schedule');
+                    },
                     leading: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -120,6 +140,9 @@ class _ProfileState extends State<Profile> {
                     thickness: 0.8,
                   ),
                   ListTile(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/presc');
+                    },
                     leading: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,

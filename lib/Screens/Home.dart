@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mediaid1/Widgets/buttons/docHomeCard.dart';
+import 'package:mediaid1/Widgets/docHomeCard.dart';
 
 import '../Widgets/buttons/homebuttons.dart';
 class Home extends StatefulWidget {
@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
               ),),
             ),ListTile(
               onTap: (){
-                Navigator.pushNamed(context, '');
+                Navigator.pushNamed(context, '/msg');
               },
               leading:Icon(CupertinoIcons.text_bubble),
               title: Text('Messages',style: TextStyle(
@@ -68,7 +68,15 @@ class _HomeState extends State<Home> {
               ),),
             ),ListTile(
               onTap: (){
-                Navigator.pushNamed(context, '');
+                Navigator.pushNamed(context, '/ai');
+              },
+              leading:Icon( Icons.attractions_rounded),
+              title: Text('MedBot Ai',style: TextStyle(
+                  fontSize: 18
+              ),),
+            ),ListTile(
+              onTap: (){
+                Navigator.pushNamed(context, '/schedule');
               },
               leading:Icon(CupertinoIcons.calendar_today),
               title: Text('Appointment',style: TextStyle(
@@ -76,7 +84,7 @@ class _HomeState extends State<Home> {
               ),),
             ),ListTile(
               onTap: (){
-                Navigator.pushNamed(context, '');
+                Navigator.pushNamed(context, '/insurance');
               },
               leading:Icon(CupertinoIcons.checkmark_shield),
               title: Text('Insurance',style: TextStyle(
@@ -119,9 +127,9 @@ class _HomeState extends State<Home> {
               ),
             ),
             Expanded(
-              child: Icon(Icons.notifications_none_rounded,
+              child: Icon(CupertinoIcons.bell,
               color: Colors.black38,
-              size: 35,),
+              size: 26,),
             )
           ],
         ),
@@ -130,7 +138,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 5),
             child: Container(
             height: 56,
             decoration: BoxDecoration(
@@ -142,8 +150,7 @@ class _HomeState extends State<Home> {
               spreadRadius: 0.5,
             )]
             ),
-
-            child:   Padding(
+             child:   Padding(
               padding: const EdgeInsets.fromLTRB(19, 8, 10, 12),
               child: TextField(
                 decoration: InputDecoration(
@@ -168,10 +175,10 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                homebuttons(title: 'Doctors', image: 'assets/steth.png', route: '/doctors',),
-                homebuttons(title: 'Hospital', image: 'assets/hospital.png', route: '/doctors',),
-                homebuttons(title: 'Health', image: 'assets/care.png', route: '/doctors',),
-                homebuttons(title: 'Prescription', image: 'assets/pill.png', route: '/doctors',),
+                homebuttons(title: 'Doctors', image: 'assets/steth.png', route: '/finddoctors',),
+                homebuttons(title: 'Hospital', image: 'assets/hospital.png', route: '/hospitals',),
+                homebuttons(title: 'Health', image: 'assets/care.png', route: '/health',),
+                homebuttons(title: 'Prescription', image: 'assets/pill.png', route: '/presc',),
 
               ],
             ),
@@ -203,20 +210,25 @@ class _HomeState extends State<Home> {
                           ),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                            child: Container(
-                              width: 120,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: Colors.cyan
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Learn More',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                    fontSize: 15
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pushNamed(context, '/demo');
+                              },
+                              child: Container(
+                                width: 120,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.cyan
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Learn More',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                      fontSize: 15
+                                    ),
                                   ),
                                 ),
                               ),
@@ -250,7 +262,7 @@ class _HomeState extends State<Home> {
                   ),),
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushNamed(context, '/doctors');
+                      Navigator.pushNamed(context,'/doctors');
                     },
                     child: Text('See all',
                     style: TextStyle(

@@ -1,12 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mediaid1/Screens/DocProfile.dart';
-class docCard extends StatelessWidget {
+import 'package:flutter/services.dart ';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+class PresCard extends StatelessWidget {
   final String image;
   final title;
   final subtitle;
   final route;
-  const docCard({Key? key, required this.image, this.title, this.subtitle, this.route}) : super(key: key);
+  final details;
+  const PresCard({Key? key, required this.image, this.title, this.subtitle, this.route, this.details}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +18,7 @@ class docCard extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: GestureDetector(
         onTap: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DocProfile(name: title, image: image,spec: subtitle,),
-            ),
-          );
+          _showImageDialog(context);
         },
         child: Container(
           height: 125,
@@ -91,13 +90,16 @@ class docCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(CupertinoIcons.location_solid,size: 18,color: Colors.black26,),
-                      Text('800m away',
-                        style: TextStyle(
-                            color: Colors.black26,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14
-                        ),)
+                      Icon(Icons.medical_information_rounded,size: 18,color: Colors.black26,),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        child: Text(details,
+                          style: TextStyle(
+                              color: Colors.black26,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14
+                          ),),
+                      )
                     ],
                   )
                 ],
@@ -107,5 +109,51 @@ class docCard extends StatelessWidget {
         ),
       ),
     );
+  }
+  void _showImageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            children: [
+              Image(
+                image: AssetImage(
+                  image,
+                ),
+                height: 500,width: 600,
+              ),
+              // SizedBox(height: 16),
+              // ElevatedButton(
+              //   onPressed: () async {
+              //     await _checkAndRequestPermission(context,image);
+              //   },
+              //   child: Text("Download"),
+              // ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  Future<void> _downloadImage( String imageAssetPath) async {
+    final ByteData data = await rootBundle.load(imageAssetPath);
+    final List<int> bytes = data.buffer.asUint8List();
+
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+    final String imageName = '$dir/${imageAssetPath.split('/').last}';
+    final String imagePath = '$dir/$imageName';
+
+    File(imagePath).writeAsBytes(bytes);
+  }
+  Future<void> _checkAndRequestPermission(BuildContext context, String image) async {
+    PermissionStatus status = await Permission.storage.request();
+    if (status.isGranted) {
+       _downloadImage(  image);
+       final snackBar = SnackBar(content: Text('Image downloaded'));
+       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+       print("Permission denied for file storage.");
+    }
   }
 }

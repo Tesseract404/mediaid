@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
             ),
             formFields(title: "Enter your password", logo: CupertinoIcons.lock),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 //crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +143,22 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: 15,
             ),
-            Text("Already have an account? Login")
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Already have an account?"),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: Text(" Login",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color:  Color(0xff32c1e0),
+                    ),),
+                ),
+              ],
+            )
           ],
         ),
       ),
