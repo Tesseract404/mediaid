@@ -85,13 +85,13 @@ class ScheduleCard extends StatelessWidget {
                           '10:30 AM',
                           style: TextStyle(fontSize: 17, color: Colors.black54),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text(
-                            'Confirmed',
-                            style: TextStyle(fontSize: 17, color: Colors.greenAccent),
-                          ),
-                        )
+                        // Padding(
+                        //   padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        //   child: Text(
+                        //     'Confirmed',
+                        //     style: TextStyle(fontSize: 17, color: Colors.greenAccent),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),

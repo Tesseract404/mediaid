@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mediaid1/Screens/Home.dart';
-import 'package:mediaid1/Widgets/diagnosis.dart';
 import 'package:mediaid1/Widgets/diagnosisSmaller.dart';
-
-import '../Widgets/buttons/ActionButton.dart';
+import '../Services/UserDataService.dart';
+import '../Model/userdata.dart';
 import '../Widgets/buttons/ActionButtonSmall.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -15,6 +14,31 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  int userId = -1;
+  String name = ' ';
+  String email = ' ';
+  userdata? userData;
+  final userDataService = UserDataService();
+  @override
+  void initState() {
+    super.initState();
+    userDataService.getUserId().then((id) {
+      setState(() {
+        userId = id;
+      });
+      if (userId != -1) {
+        userDataService.fetchUserData(userId).then((data) {
+          if (data != null) {
+            setState(() {
+              userData = data;
+              name = data.name;
+              email = data.email;
+            });
+          }
+        });
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +46,7 @@ class _ProfileState extends State<Profile> {
         body: Stack(children: <Widget>[
           Container(
             height: 900,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
@@ -37,42 +61,45 @@ class _ProfileState extends State<Profile> {
             )),
           ),
           Positioned(
-              top: 70,
+              top: 60,
               right: 100,
               left: 100,
               child: Column(
-                children: [
-                  const Icon(
+                children:   [
+                  Icon(
                     CupertinoIcons.person_crop_circle,
                     size: 80,
                     color: Colors.white,
                   ),
                   SizedBox(height: 10,),
-                  Text('Adam Lei',
+                  Text('$name',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 30,
                     color: Colors.white
                   ),),
-                  Text('adamlei@gmail.com',
+                  Text('$email',
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
                     color: Color(0xff4b8099)
                   ),),
-                ], 
+                ],
               )),
           Positioned(
-            top: 250,
+            top: 200,
             right: 20,
             left: 20,
             child:
-          Row(
-            children: [
-              Expanded(child: diagnosisSmaller (icon: 'assets/pulse.png',title: 'Heart Rate', count: '215bpm',)),
-              Expanded(child: diagnosisSmaller(icon: 'assets/cal.png',title: 'Calories', count: '756cal',)),
-              Expanded(child: diagnosisSmaller(icon: 'assets/scale.png',title: 'Weight', count: '64kgs',)),
-            ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10 ),
+            child: Row(
+              children: [
+                Expanded(child: diagnosisSmaller (icon: 'assets/pulse.png',title: 'Heart Rate', count: '215bpm',)),
+                Expanded(child: diagnosisSmaller(icon: 'assets/cal.png',title: 'Calories', count: '756cal',)),
+                Expanded(child: diagnosisSmaller(icon: 'assets/scale.png',title: 'Weight', count: '64kgs',)),
+              ],
+            ),
           ), ),
           Positioned(
             right: 0,
@@ -165,6 +192,9 @@ class _ProfileState extends State<Profile> {
                     thickness: 0.8,
                   ),
                   ListTile(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/records');
+                    },
                     leading: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -178,7 +208,7 @@ class _ProfileState extends State<Profile> {
                           ),
                         )),
                     title: Text(
-                      'History',
+                      'Medical Records',
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     trailing: Icon(CupertinoIcons.forward),
@@ -189,7 +219,7 @@ class _ProfileState extends State<Profile> {
                   GestureDetector(
                     onTap: () {
                       showDialog(context: context, builder: (context)=> AlertDialog(
-                        content: Container(
+                        content: SizedBox(
                           height: 350,
                           width: 30,
                           child: Column(
@@ -217,7 +247,7 @@ class _ProfileState extends State<Profile> {
                                     fontWeight: FontWeight.w800
                                 ),),
                               ),
-                               Expanded(flex:2,child: ActionButtonSmall(title:'Log Out',route: '/login', color:Colors.black12 )),
+                               Expanded(flex:2,child: ActionButtonSmall(title:'Log Out',route: '/getstart', color:Colors.black12 )),
                                Expanded(flex:2,child: ActionButtonSmall(title:'Cancel',route: '', color:Color(0xff32c1e0), )),
                             ],
                           ),

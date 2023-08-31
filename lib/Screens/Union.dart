@@ -2,20 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mediaid1/Screens/Medbot.dart';
 import 'package:mediaid1/Screens/Messages.dart';
-import 'package:mediaid1/Screens/Schedule.dart';
+import 'package:mediaid1/Screens/Schedules.dart';
 
 import 'Home.dart';
 import 'Profile.dart';
 class Union extends StatefulWidget {
-  const Union({Key? key}) : super(key: key);
-
+  final int index;
+    Union({Key? key, required this.index}) : super(key: key);
   @override
   State<Union> createState() => _UnionState();
 }
 
 class _UnionState extends State<Union> {
-  int _selectedIndex =0;
-
+  late int _selectedIndex  ;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Messages(),
@@ -27,6 +26,11 @@ class _UnionState extends State<Union> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex=widget.index;
   }
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,7 @@ class _UnionState extends State<Union> {
             label: 'Inbox',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.smiley),
+            icon: Icon(Icons.attractions_rounded),
             label: 'ai',
           ),
           BottomNavigationBarItem(

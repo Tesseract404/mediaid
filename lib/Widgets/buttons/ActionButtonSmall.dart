@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../Services/ChatProvider.dart';
 class ActionButtonSmall extends StatelessWidget {
   final route;
   final title;
@@ -7,6 +10,7 @@ class ActionButtonSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chatProvider = Provider.of<ChatProvider>(context) ;
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: GestureDetector(
@@ -16,6 +20,7 @@ class ActionButtonSmall extends StatelessWidget {
               Navigator.pop(context);
             }
             else {
+              chatProvider.dispose();
               Navigator.pushNamed(context, route);
           }
         },

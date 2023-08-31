@@ -32,8 +32,8 @@ class homebuttons extends StatelessWidget {
                   image: AssetImage(
                     image,
                   ),
-                  height: 50,
-                  width: 50,
+                  height: 48,
+                  width: 48,
                 ),
               ),
             ),

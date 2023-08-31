@@ -1,0 +1,222 @@
+//  int userId = -1;
+  // String name = ' ';
+  // String email = ' ';
+  // userdata? userData;
+  // // Future<int> getId() async{
+  // //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  // //   var  Id = prefs.getInt('user_id') ?? -1;
+  // //   return  Id;
+  // // }
+  // // Future<userdata?> fetchUserData(int userId) async {
+  // //   final url = Uri.parse('$BASE_URL/fetchdata.php?user_id=$userId');
+  // //   final response = await http.get(url);
+  // //   if (response.statusCode == 200) {
+  // //     final jsonData = json.decode(response.body);
+  // //     return userdata(
+  // //       id: jsonData['user_id'],
+  // //       name: jsonData['name'],
+  // //       email: jsonData['email'],
+  // //       password: jsonData['password'],
+  // //     );
+  // //   } else {
+  // //     throw Exception('Failed to fetch user data');
+  // //   }
+  // // }
+  // // @override
+  // // void initState() {
+  // //   super.initState();
+  // //   getId().then((id) {
+  // //     setState(() {
+  // //       userId = id;
+  // //     });
+  // //
+  // //     if (userId != -1) {
+  // //       fetchUserData(userId).then((userData) {
+  // //         if (userData != null) {
+  // //           setState(() {
+  // //             name = userData.name;
+  // //             email= userData.email;
+  // //           });
+  // //         }
+  // //       });
+  // //     }
+  // //   });
+  // //}
+  // final userDataService = UserDataService();
+  // userDataService.getUserId().then((id) {
+      //   setState(() {
+      //     userId = id;
+      //   });
+      //
+      //   if (userId != -1) {
+      //     userDataService.fetchUserData(userId).then((data) {
+      //       if (data != null) {
+      //         setState(() {
+      //           userData = data;
+      //           name = data.name;
+      //           email = data.email;
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
+      // void addSchedule(ScheduleData scheduleData) {
+        //   setState(() {
+        //     _scheduleList.add(scheduleData);
+        //   });
+        // }
+        //@override
+        // void initState() async{
+        //   super.initState();
+        //   final result = await Navigator.pushNamed(
+        //     context,
+        //     '/docid'
+        //   );
+        //   if (result != null && result is ScheduleData) {
+        //     setState(() {
+        //       _scheduleList.add(result);print("Number of prescriptions: ${_scheduleList.length}");
+        //     });
+        //   }
+        // }
+        /// Showing not error but photo's not saving in dbs
+          // Future<void> _submitPrescription1() async {
+          //   final int id = userDataManager.userId;
+          //   final String name = userDataManager.name;
+          //   final String doctorsName = _name.text;
+          //   final String category = _catagory.text;
+          //   final String typeDetails =_details.text;
+          //   if (_selectedImagePath == null) {
+          //     print('No image selected');
+          //     Fluttertoast.showToast(msg: 'No image selected');
+          //     return;
+          //   }
+          //   final ImageProvider imagePath =  FileImage(File(_selectedImagePath!));
+          //   final String image = _selectedImagePath!;
+          //   final prescriptionData = PrescriptionData(
+          //     image: imagePath,
+          //     title: doctorsName,
+          //     category: category,
+          //     details: typeDetails,
+          //   );
+          //   setState(() {
+          //     _prescriptionData = prescriptionData;
+          //     //print(_name.text);
+          //   });
+          //   Navigator.pop(context,prescriptionData);
+          //
+          //   ///database connections setup
+          //   var url = '$BASE_URL/presc.php';
+          //   var request = http.MultipartRequest('POST', Uri.parse(url));
+          //   request.fields['user_id'] = id.toString();
+          //   request.fields['name'] = name;
+          //   request.fields['doctor_name'] = doctorsName;
+          //   request.fields['spec'] = category;
+          //   request.fields['details'] = typeDetails;
+          //
+          //   var photoFile = File(image);
+          //   var photoStream = http.ByteStream(photoFile.openRead());
+          //   var photoLength = await photoFile.length();
+          //   var photoMultipartFile = http.MultipartFile('presc_photo', photoStream, photoLength, filename: '$name$id.jpg');
+          //   request.files.add(photoMultipartFile);
+          //   // var photo = await http.MultipartFile.fromPath('presc_photo', image);
+          //   // request.files.add(photo);
+          //   var response = await request.send();
+          //
+          //   if (response.statusCode == 200) {
+          //     final jsonResponse = json.decode(await response.stream.bytesToString());
+          //     final status = jsonResponse['query'];
+          //
+          //     if (status == 'success') {
+          //       print('Prescription uploaded successfully');
+          //       Fluttertoast.showToast(msg: 'Prescription uploaded successfully');
+          //     } else {
+          //       print('Error uploading prescription');
+          //       // Handle the error as per your application logic
+          //     }
+          //   } else {
+          //     print('Failed to send prescription: ${response.reasonPhrase}');
+          //     // Handle the HTTP request error as per your application logic
+          //   }
+          // }
+
+          /// photo saving in dbs as BLOB file .bin but showing error in console
+          // Future<void> _submitPrescription2() async {
+          //   final int id = userDataManager.userId;
+          //   final String name = userDataManager.name;
+          //   final String doctorsName = _name.text;
+          //   final String category = _catagory.text;
+          //   final String typeDetails =_details.text;
+          //   if (_selectedImagePath == null) {
+          //     print('No image selected');
+          //     Fluttertoast.showToast(msg: 'No image selected');
+          //     return;
+          //   }
+          //   final ImageProvider imagePath =  FileImage(File(_selectedImagePath!));
+          //   final String image = _selectedImagePath!;
+          //   final prescriptionData = PrescriptionData(
+          //     image: imagePath,
+          //     title: doctorsName,
+          //     category: category,
+          //     details: typeDetails,
+          //   );
+          //   setState(() {
+          //     _prescriptionData = prescriptionData;
+          //     //print(_name.text);
+          //   });
+          //   Navigator.pop(context,prescriptionData);
+          //
+          //   ///database connections setup
+          //   try{
+          //     var url = Uri.parse('$BASE_URL/prescr.php');
+          //     var response = await http.post(url,
+          //         body: {
+          //           "user_id": id.toString(),
+          //           "name": name,
+          //           "doctor_name": doctorsName,
+          //           "spec" : category,
+          //           "details" : typeDetails,
+          //           "presc_photo" : image,
+          //         });
+          //     print('reached');
+          //     var data = json.decode(response.body);
+          //     print(data);
+          //     if(data == "success"){
+          //       Fluttertoast.showToast(msg: 'New Schedule Added');
+          //     }
+          //   }catch(e){
+          //     print(e);
+          //   }
+          //
+          //
+          // }
+        // var request = http.MultipartRequest('POST', Uri.parse(url));
+          // request.fields['user_id'] = id.toString();
+          // request.fields['name'] = name;
+          // request.fields['doctor_name'] = doctorsName;
+          // request.fields['spec'] = category;
+          // request.fields['details'] = typeDetails;
+          //
+          // var photoFile = File(image);
+          // var photoStream = http.ByteStream(photoFile.openRead());
+          // var photoLength = await photoFile.length();
+          // var photoMultipartFile = http.MultipartFile('presc_photo', photoStream, photoLength, filename: '$name$id.jpg');
+          // request.files.add(photoMultipartFile);
+          // // var photo = await http.MultipartFile.fromPath('presc_photo', image);
+          // // request.files.add(photo);
+          // var response = await request.send();
+          //
+          // if (response.statusCode == 200) {
+          //   final jsonResponse = json.decode(await response.stream.bytesToString());
+          //   final status = jsonResponse['query'];
+          //
+          //   if (status == 'success') {
+          //     print('Prescription uploaded successfully');
+          //     Fluttertoast.showToast(msg: 'Prescription uploaded successfully');
+          //   } else {
+          //     print('Error uploading prescription');
+          //     // Handle the error as per your application logic
+          //   }
+          // } else {
+          //   print('Failed to send prescription: ${response.reasonPhrase}');
+          //   // Handle the HTTP request error as per your application logic
+          // }
