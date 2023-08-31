@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
+import '../Model/doctorModel.dart';
+import '../Services/DoctorList.dart';
 import '../Widgets/buttons/backbutton.dart';
 import '../Widgets/docCard.dart';
 import '../Widgets/docCard2.dart';
@@ -11,6 +15,8 @@ class Hospitals extends StatefulWidget {
 }
 
 class _HospitalsState extends State<Hospitals> {
+  final List<doctorModel> _doctorsList = DoctorList().doctorList;
+  List<String> hospital = ['Popular Hospital', 'Square Hospital', 'LabAid', 'Lubana', 'Ibn Cena','Dhaka Medical','EverCare','Apollo'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +26,11 @@ class _HospitalsState extends State<Hospitals> {
         backgroundColor: Colors.white,
         leading:backbutton (),
         title: Row(
-          children: [
+          children: const [
             Expanded(
               flex: 9,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0 , 20,  0),
+                padding: EdgeInsets.fromLTRB(0, 0 , 20,  0),
                 child: Text(
                   'Hospitals'  ,
                   textAlign: TextAlign.center,
@@ -36,22 +42,21 @@ class _HospitalsState extends State<Hospitals> {
                 ),
               ),
             ),
-            Expanded(
-              child: Icon(Icons.more_vert_rounded,
-                color: Colors.black38,
-                size: 25,),
-            )
+
           ],
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(height: 10,),
-            docCard2(image: 'assets/doc3.png',title: 'Dr. Diandra',subtitle: 'Psychologist',hospital: 'Popular Hospital'),
-            docCard2(image: 'assets/doc1.png',title: 'Dr. Stefi hezel',subtitle: 'Chardiologist',hospital: 'Square Hospital',),
-            docCard2(image: 'assets/doc4.png',title: 'Dr. Gerty Cori',subtitle: 'Chardiologist',hospital: 'Ibn Cena Hospital'),
-            docCard2(image: 'assets/doc2.png',title: 'Dr. Marcus Horizon',subtitle: 'Orthopedist',hospital: 'LabAid Hospital'),
+            for (int index = 0; index < _doctorsList.length; index++)
+              docCard2(
+                image:  _doctorsList[index].image,
+                title: _doctorsList[index].title,
+                subtitle: _doctorsList[index].category,
+                hospital: hospital,
+              )
 
           ],
         ),

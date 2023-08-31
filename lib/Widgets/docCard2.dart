@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../Screens/DocProfile.dart';
 class docCard2 extends StatelessWidget {
-  final String image;
+  final String? image;
   final title;
   final subtitle;
-  final hospital;
+  final List<String> hospital;
   final route;
-  const docCard2({Key? key, required this.image, this.title, this.subtitle, this.route, this.hospital}) : super(key: key);
+  const docCard2({Key? key, required this.image, this.title, this.subtitle, this.route, required this.hospital}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    hospital.shuffle();
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: GestureDetector(
@@ -27,7 +28,7 @@ class docCard2 extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: CupertinoColors.white,
-              boxShadow: [BoxShadow(
+              boxShadow: const [BoxShadow(
                 color: Colors.black12,
                 blurRadius: 1.0,
                 spreadRadius: 0.2,
@@ -35,85 +36,83 @@ class docCard2 extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image(
-                    image: AssetImage(
-                      image,
+              Expanded(
+                flex: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image(
+                      image: image!.isNotEmpty?
+                      (showImage(image!) as Image).image
+                          : const AssetImage('default.png'),
+                      height: 135,width: 120,
                     ),
-                    height: 135,
-                    width: 120,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0,10  , 0, 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20
-                      ),),
-                    SizedBox(height: 5,),
-                    Text(subtitle,
-                      style: TextStyle(
-                          color: Colors.black26,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14
-                      ),),
-                    SizedBox(height: 15,),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: Text(hospital,
-                        style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16
+              Expanded(
+                flex: 6,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0,10  , 0, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20
                         ),),
-                    ),
-
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                        color:Color(0xffD8FCEB),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.star,
-                              color:  Color(0xff38CC86),
-                              size: 18,
-                            ),
-                            SizedBox(width: 5,),
-                            Text('4.7',
-                              style: TextStyle(
-                                  color: Color(0xff38CC86),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15
-                              ),),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 5,),
-                    Row(
-                      children: [
-                        Icon(CupertinoIcons.location_solid,size: 18,color: Colors.black26,),
-                        Text('800m away',
-                          style: TextStyle(
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0,5  , 0, 5),
+                        child: Text(subtitle,
+                          style: const TextStyle(
                               color: Colors.black26,
                               fontWeight: FontWeight.w400,
                               fontSize: 14
-                          ),)
-                      ],
-                    )
-                  ],
+                          ),),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                        child: Text(hospital[0],
+                          style: const TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18
+                          ),),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color:Color(0xffD8FCEB),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.star,
+                                    color:  Color(0xff38CC86),
+                                    size: 18,
+                                  ),
+                                  SizedBox(width: 5,),
+                                  Text('4.7',
+                                    style: TextStyle(
+                                        color: Color(0xff38CC86),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15
+                                    ),),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    ],
+                  ),
                 ),
               )
             ],

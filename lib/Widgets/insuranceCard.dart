@@ -1,74 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mediaid1/Widgets/insuranceDetailsRow.dart';
-// class insuranceCard extends StatelessWidget {
-//   final String image;
-//   final name;
-//   final price;
-//   const insuranceCard({Key? key, required this.image, this.name, this.price}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-//       child: Container(
-//         decoration: BoxDecoration(
-//           color: Color(0xffe1ebfc),
-//           borderRadius: BorderRadius.circular(16)
-//         ),
-//         child: Row(
-//           children: [
-//             Expanded(
-//               flex: 3,
-//               child: Padding(
-//                 padding: const EdgeInsets.all(8),
-//                 child: Image(
-//                   image: AssetImage(image),
-//                   height: 110,
-//                   width: 110,
-//                 ),
-//               ),
-//             ),
-//             Expanded(
-//               flex: 6,
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(name,
-//                     style: TextStyle(
-//                         color: Colors.black,
-//                         fontWeight: FontWeight.w600,
-//                         fontSize: 21
-//                     ),),
-//                   Padding(
-//                     padding: const EdgeInsets.fromLTRB(0, 5,  0, 5),
-//                     child: Text( '$price per year',
-//                       style: TextStyle(
-//                           color: Colors.green,
-//                           fontWeight: FontWeight.w600,
-//                           fontSize: 18
-//                       ),),
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.fromLTRB(0, 5, 20, 5),
-//                     child: Text('Terminal illness benefit if you are diagnosed with Terminal illness.Get 100% of your cover immmidiately',
-//                       textAlign: TextAlign.start,
-//                       style: TextStyle(
-//                           color: Colors.grey.shade700,
-//                           fontWeight: FontWeight.w400,
-//                           fontSize: 13
-//                       ),),
-//                   ),
-//
-//                 ],
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 class insuranceCard extends StatefulWidget {
   final String image;
   final String name;
@@ -85,6 +17,13 @@ class _insuranceCardState extends State<insuranceCard> {
 
   @override
   Widget build(BuildContext context) {
+    final details = [
+      insuranceDetailsRow(icon: CupertinoIcons.person_crop_square,title: 'Insurance ID: 315166511'),
+      insuranceDetailsRow(icon: CupertinoIcons.checkmark_shield_fill,title: widget.name),
+      insuranceDetailsRow(icon: Icons.clean_hands,title: 'Get 33% off on your health issue'),
+      insuranceDetailsRow(icon: CupertinoIcons.calendar_badge_plus,title: '07/08/2025'),
+    ];
+    final expandedHeight = _isExpanded ? details.length * 40.0 : 0.0;
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
       child: Container(
@@ -112,12 +51,15 @@ class _insuranceCardState extends State<insuranceCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.name,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 21,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: Text(
+                          widget.name,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 21,
+                          ),
                         ),
                       ),
                       Padding(
@@ -163,18 +105,19 @@ class _insuranceCardState extends State<insuranceCard> {
                 ),
               ),
             ),
-            if (_isExpanded)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+            AnimatedCrossFade(
+              duration: Duration(milliseconds: 150),
+              crossFadeState: _isExpanded
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+              firstChild: SizedBox.shrink(),
+              secondChild: Padding(
+                padding: const EdgeInsets.all(9.0),
                 child: Column(
-                  children:  [
-                     insuranceDetailsRow(icon: CupertinoIcons.person_crop_square,title: 'Insurance ID: 315166511'),
-                     insuranceDetailsRow(icon: CupertinoIcons.checkmark_shield_fill,title: widget.name),
-                     insuranceDetailsRow(icon: Icons.clean_hands,title: 'Get 33% off on your health issue'),
-                     insuranceDetailsRow(icon: CupertinoIcons.calendar_badge_plus,title: '07/08/2025'),
-                  ],
+                  children: details,
                 ),
               ),
+            ),
           ],
         ),
       ),

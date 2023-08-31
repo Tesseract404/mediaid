@@ -39,15 +39,17 @@ class _InsuranceState extends State<Insurance> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          insuranceCard(image: 'assets/wpa.png',name: 'WPA Health Insurance',price: '33000/- Taka',),
-          insuranceCard(image: 'assets/metlife.png',name: 'Metlife Health Insurance',price: '56000/- Taka',),
-          Padding(
-            padding: const EdgeInsets.fromLTRB( 0, 50,  0, 0),
-            child: ActionButton(route: '/insurance',title: 'Add Plan',),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            insuranceCard(image: 'assets/wpa.png',name: 'WPA Health Insurance',price: '33000/- Taka',),
+            insuranceCard(image: 'assets/metlife.png',name: 'Metlife Health Insurance',price: '56000/- Taka',),
+            Padding(
+              padding: const EdgeInsets.fromLTRB( 0, 50,  0, 0),
+              child: ActionButton(route: '/insurance',title: 'Add Plan',),
+            )
+          ],
+        ),
       ),
     );
   }
